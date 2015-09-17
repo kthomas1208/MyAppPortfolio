@@ -1,10 +1,6 @@
 package com.dreammist.myappportfolio;
 
-import android.app.ActionBar;
 import android.app.Activity;
-import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,83 +12,19 @@ import java.nio.charset.Charset;
 
 public class MainActivity extends Activity {
 
+    //Toast variable
+    private Toast mAppToast;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final Context context = getApplicationContext();
-        final CharSequence introText = "This button will launch my ";
-        ActionBar actionBar = getActionBar();
-        //actionBar.setBackgroundDrawable(new ColorDrawable(Color.RED));
-
-        Button spotifyButton = (Button) findViewById(R.id.spotify_button);
-        spotifyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CharSequence toastText = introText + "Spotify Streamer app!";
-                Toast toast = Toast.makeText(context,toastText,Toast.LENGTH_SHORT);
-                toast.show();
-            }
-        });
-
-        Button launchScoresButton = (Button) findViewById(R.id.scores_button);
-        launchScoresButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CharSequence toastText = introText + "Football Scores app!";
-                Toast toast = Toast.makeText(context,toastText,Toast.LENGTH_SHORT);
-                toast.show();
-            }
-        });
-
-        Button launchLibraryButton = (Button) findViewById(R.id.library_button);
-        launchLibraryButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CharSequence toastText = introText + "Library app!";
-                Toast toast = Toast.makeText(context,toastText,Toast.LENGTH_SHORT);
-                toast.show();
-            }
-        });
-
-        Button launchBuildItBiggerButton = (Button) findViewById(R.id.build_it_button);
-        launchBuildItBiggerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CharSequence toastText = introText + "Build It Bigger app!";
-                Toast toast = Toast.makeText(context,toastText,Toast.LENGTH_SHORT);
-                toast.show();
-            }
-        });
-
-        Button launchXYZReaderButton = (Button) findViewById(R.id.xyz_button);
-        launchXYZReaderButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CharSequence toastText = introText + "XYZ Reader app!";
-                Toast toast = Toast.makeText(context,toastText,Toast.LENGTH_SHORT);
-                toast.show();
-            }
-        });
-
-        Button launchCapstoneProjectButton = (Button) findViewById(R.id.capstone_button);
-        launchCapstoneProjectButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CharSequence toastText = introText + "capstone project app!";
-                Toast toast = Toast.makeText(context,toastText,Toast.LENGTH_SHORT);
-                toast.show();
-            }
-        });
-
-
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        //getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -109,5 +41,40 @@ public class MainActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Builds and displays the string for the toast
+     * @param appName the name of the app to be launched
+     */
+    public void displayToast(CharSequence appName) {
+        //build toast string
+        CharSequence toastMessage = "This button will launch " + appName + "!";
+
+        //clear any existing toast
+        if(mAppToast!=null) mAppToast.cancel();
+
+        //create and display toast
+        mAppToast = Toast.makeText(this,toastMessage,Toast.LENGTH_SHORT);
+        mAppToast.show();
+    }
+
+    /**
+     * Handles button press from each button by showing a toast
+     * @param v the view from which you can get the button
+     */
+    public void showToast(View v) {
+        switch(v.getId()) {
+            case R.id.spotify_button:
+            case R.id.scores_button:
+            case R.id.library_button:
+            case R.id.build_it_button:
+            case R.id.xyz_button:
+            case R.id.capstone_button:
+                displayToast(((Button)v).getText()); //all buttons will display a toast w/ app name
+                break;
+            default:
+                break;
+        }
     }
 }

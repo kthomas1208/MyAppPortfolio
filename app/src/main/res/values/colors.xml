@@ -1,5 +1,10 @@
 <resources>
+
+    <!-- Primary colors -->
     <color name="primary">#3F51B5</color>
     <color name="primary_dark">#1A237E</color>
     <color name="accent">#FF1744</color>
+
+    <!-- Text colors -->
+    <color name="button_text">#FFF</color>
 </resources>
